@@ -5,44 +5,39 @@
 package sudoku_bibkodan;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 
 /**
  *
  * @author Daniel
  */
 public class Window extends JFrame {
-
+    
+    Double cislo;
+    int riadok;
+    int stlpec;
+    int cislo1;
+    boolean tah = false;
+    
+    Tlacitko t;
+    Tlacitko help;
     Tlacitko cisla[] = new Tlacitko[10];
     Tlacitko hernePole[][];
     JTextArea l1 = new JTextArea();
-    JTextArea l2 = new JTextArea();
-    Sudoku sudoku = new Sudoku();
-    int riadok;
-    int stlpec;
-    Double cislo;
-    int cislo1;
-    boolean tah = false;
-    Tlacitko t;
-    Tlacitko help;
+    
     Obsluha2 o1 = new Obsluha2();
     Obsluha3 o3 = new Obsluha3();
     Obsluha4 o4 = new Obsluha4();
+    
+    Sudoku sudoku = new Sudoku();
 
     public Window(int a) throws IOException {        
         super("SUDOKU  BIBKODAN");
@@ -187,11 +182,7 @@ public class Window extends JFrame {
                 + "\nkde chces zmenit cislo");
         l1.setEditable(false);
         this.add(l1);
-
-        l2.setBounds(485, 190, 150, 80);
-        l2.setText("BIBKODAN SUDOKU");
-        l2.setEditable(false);
-        this.add(l2);
+        
     }
 
     class Obsluha2 implements ActionListener {
