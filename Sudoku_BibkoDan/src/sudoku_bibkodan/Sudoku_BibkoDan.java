@@ -14,8 +14,8 @@ public class Sudoku_BibkoDan {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       Window w = new Window();
-       w.setVisible(true);
+        Start s = new Start();
+        s.setVisible(true);
         
         
     }
