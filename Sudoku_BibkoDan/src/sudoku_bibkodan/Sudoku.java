@@ -4,15 +4,9 @@
  */
 package sudoku_bibkodan;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,8 +15,7 @@ import java.util.Scanner;
  * @author Daniel
  */
 public class Sudoku {
-    
-    Scanner scan = new Scanner(System.in);
+
     public int[][] herneSudoku = new int[9][9]; // Herne sudoku
     public int[][] zadaneSudoku = new int[9][9]; // Zaciatocne sudoku 
     public int[][] vyrieseneSudoku = new int[9][9]; // Vygenerovanie vyrieseneho sudoku
@@ -51,11 +44,8 @@ public class Sudoku {
 
         for (int i = 0; i < 9; i++) {
             int n = cisla[i];
-            if (!existujeVstlpci(vyrieseneSudoku, n, stlpec)
-                    && !existujeVriadku(vyrieseneSudoku, n, riadok)
-                    && !existujeVbunke(vyrieseneSudoku, n, riadok, stlpec)) {
+            if (!existujeVstlpci(vyrieseneSudoku, n, stlpec) && !existujeVriadku(vyrieseneSudoku, n, riadok) && !existujeVbunke(vyrieseneSudoku, n, riadok, stlpec)) {
                 vyrieseneSudoku[riadok][stlpec] = n; //Pokial prejde podmienkou na zistenie podla pravidiel v sudoku, tak sa na danu poziciu zapise cislo.
-
                 if (generujVyrieseneSudoku(pom + 1)) {
                     return true;
                 }
@@ -151,7 +141,6 @@ public class Sudoku {
         return false;
     }
 
-    
     public void ukladanie(int[][] a, int[][] b, int[][] c) throws IOException { // Ukladanie hry, program uklada tri polia. 
         FileWriter fw = new FileWriter("c:/Users/Daniel/Documents/NetBeansProjects/Bibko_Daniel_Semestralka_Sudoku/sudoku.txt");
         for (int riadok = 0; riadok < 9; riadok++) {

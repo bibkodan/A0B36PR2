@@ -16,7 +16,5 @@ public class Sudoku_BibkoDan {
     public static void main(String[] args) {
         Start s = new Start();
         s.setVisible(true);
-        
-        
     }
 }
