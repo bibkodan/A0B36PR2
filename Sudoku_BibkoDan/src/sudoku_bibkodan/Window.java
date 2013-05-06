@@ -20,37 +20,35 @@ import javax.swing.JTextArea;
  * @author Daniel
  */
 public class Window extends JFrame {
-    
+
     Double cislo;
     int riadok;
     int stlpec;
     int cislo1;
     boolean tah = false;
-    
     Tlacitko t;
     Tlacitko help;
     Tlacitko cisla[] = new Tlacitko[10];
     Tlacitko hernePole[][];
     JTextArea l1 = new JTextArea();
-    
     Obsluha2 o1 = new Obsluha2();
     Obsluha3 o3 = new Obsluha3();
     Obsluha4 o4 = new Obsluha4();
-    
-    Sudoku sudoku = new Sudoku();
+    Sudoku sudoku;
 
-    public Window(int a) throws IOException {        
+    public Window(int a) throws IOException {
         super("SUDOKU  BIBKODAN");
         this.setSize(660, 510);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
 
         hernePole = new Tlacitko[9][9];
+        sudoku = new Sudoku(a);
         
-        if(a==0){
+        if (a == 0) {
             sudoku.nacitanie(sudoku.herneSudoku, sudoku.zadaneSudoku, sudoku.vyrieseneSudoku);
         }
-        
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 String pom = String.format("" + sudoku.herneSudoku[i][j]);
@@ -58,7 +56,7 @@ public class Window extends JFrame {
                     pom = ("");
                 }
                 hernePole[i][j] = new Tlacitko(pom);
-                
+
                 if (sudoku.zadaneSudoku[i][j] == 0) {
                     hernePole[i][j].setBackground(Color.white);
                 }
@@ -182,11 +180,11 @@ public class Window extends JFrame {
                 + "\nkde chces zmenit cislo");
         l1.setEditable(false);
         this.add(l1);
-        
+
     }
 
     class Obsluha2 implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!tah) {
@@ -223,7 +221,7 @@ public class Window extends JFrame {
                         tah = false;
                         hernePole[riadok][stlpec].setBackground(Color.white);
                         hernePole[riadok][stlpec].setText("");
-                        sudoku.herneSudoku[riadok][stlpec]=0;
+                        sudoku.herneSudoku[riadok][stlpec] = 0;
                         l1.setText("Klikni na policko,"
                                 + "\nkde chces zmenit cislo");
                     }
@@ -264,7 +262,7 @@ public class Window extends JFrame {
                                     || sudoku.existujeVstlpci(sudoku.herneSudoku, cislo1, stlpec)
                                     || sudoku.existujeVbunke(sudoku.herneSudoku, cislo1, riadok, stlpec)) {
                                 l1.setText("Porusenie pravidiel."
-                                        + "\nOpakuj Zadanie");
+                                        + "\n\nOpakuj Zadanie!");
                             } else {
                                 sudoku.herneSudoku[riadok][stlpec] = cislo1;
                                 String pom1 = String.format("" + cislo1);

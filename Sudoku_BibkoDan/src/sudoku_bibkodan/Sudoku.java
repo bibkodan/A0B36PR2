@@ -20,9 +20,11 @@ public class Sudoku {
     public int[][] zadaneSudoku = new int[9][9]; // Zaciatocne sudoku 
     public int[][] vyrieseneSudoku = new int[9][9]; // Vygenerovanie vyrieseneho sudoku
     private Random rand = new Random();
+    int a;
 
-    public Sudoku() // Konstruktor generuje nove sudoku a jeho riesenie
+    public Sudoku(int a) // Konstruktor generuje nove sudoku a jeho riesenie
     {
+        this.a = a;
         generujVyrieseneSudoku(0);
         generujZadaneSudoku();
         generujHerneSudoku();
@@ -69,7 +71,7 @@ public class Sudoku {
         }
         zamiesa(pole);
 
-        for (int i = 0; i < 45; i++) {
+        for (int i = 0; i < a; i++) {
             int pom = pole[i];
             int stlpec = pom % 9;
             int riadok = pom / 9;
