@@ -62,6 +62,8 @@ public class Start extends JFrame {
                 hard.setBounds(180, 70, 80, 50);
                 hard.addActionListener(o1);
                 Start.this.add(hard);
+                Start.this.setVisible(false);
+                Start.this.setVisible(true);
             }
             if (e.getSource() == load) {
                 Window w = null;
