@@ -26,14 +26,14 @@ public class Window extends JFrame {
     int stlpec;
     int cislo1;
     boolean tah = false;
-    Tlacitko t;
+    Tlacitko vymaz;
     Tlacitko help;
     Tlacitko cisla[] = new Tlacitko[10];
     Tlacitko hernePole[][];
     JTextArea l1 = new JTextArea();
-    Obsluha2 o1 = new Obsluha2();
-    Obsluha3 o3 = new Obsluha3();
-    Obsluha4 o4 = new Obsluha4();
+    HernePoleListener o1 = new HernePoleListener();
+    ObsluhaCiselListener o3 = new ObsluhaCiselListener();
+    PomocneTlacitkaListener o4 = new PomocneTlacitkaListener();
     Sudoku sudoku;
 
     public Window(int a) throws IOException {
@@ -42,29 +42,30 @@ public class Window extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
 
-        hernePole = new Tlacitko[9][9];
-        sudoku = new Sudoku(a);
+        hernePole = new Tlacitko[9][9]; // Pole tlačítok 9*9 pre hru
+        sudoku = new Sudoku(a); // Vytvorenie sudoku (vyrieseneho, herneho, zadaneho), parameter a rozhoduje či sa bude hrať hra nová a akej obtiažnosti
         
-        if (a == 0) {
+        if (a == 0) { // Pri voľbe v predošlom okne na načítanie rozohranej hry sa načíta uložená
             sudoku.nacitanie(sudoku.herneSudoku, sudoku.zadaneSudoku, sudoku.vyrieseneSudoku);
         }
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) { 
             for (int j = 0; j < 9; j++) {
-                String pom = String.format("" + sudoku.herneSudoku[i][j]);
-                if (pom.equals("0")) {
+                String pom = String.format("" + sudoku.herneSudoku[i][j]); 
+                if (pom.equals("0")) { 
                     pom = ("");
                 }
-                hernePole[i][j] = new Tlacitko(pom);
+                hernePole[i][j] = new Tlacitko(pom); // Naplnenie poľa pre hru tlačítkami každé bude zobrazovať číslo z vypneného sudoku
 
-                if (sudoku.zadaneSudoku[i][j] == 0) {
+                if (sudoku.zadaneSudoku[i][j] == 0) { // Pokiaľ na danej pozícii sa nenachádza číslo (v poli sa nachádza nula, uživáteľ tam číslo nevidí), nastavuje sa farba tlačítka na bielo pre rozlíšnie
                     hernePole[i][j].setBackground(Color.white);
                 }
                 hernePole[i][j].addActionListener(o1);
             }
         }
 
-        JPanel p00 = new JPanel();
+        //Implementovanie panelov, ktoré obsahujú jednotlivé časti herného poľa
+        JPanel p00 = new JPanel(); 
         p00.setLayout(new GridLayout(3, 3));
         p00.setBounds(5, 5, 150, 150);
         for (int i = 0; i < 3; i++) {
@@ -154,7 +155,7 @@ public class Window extends JFrame {
         }
         this.add(p22);
 
-        JPanel p32 = new JPanel();
+        JPanel p32 = new JPanel(); // Implementovanie panela s číslami, ktoré sa využívajú pri dosadzovaní
         p32.setLayout(new GridLayout(3, 3));
         p32.setBounds(485, 315, 150, 150);
         for (int i = 1; i < 10; i++) {
@@ -165,17 +166,15 @@ public class Window extends JFrame {
         }
         this.add(p32);
 
-        t = new Tlacitko("( - )");
-        t.setBounds(485, 285, 70, 30);
-        t.addActionListener(o4);
-        this.add(t);
+        vymaz = new Tlacitko("( - )", 485, 285, 70, 30);
+        vymaz.addActionListener(o4);
+        this.add(vymaz);
 
-        help = new Tlacitko("help");
-        help.setBounds(565, 285, 70, 30);
+        help = new Tlacitko("help", 565, 285, 70, 30);
         help.addActionListener(o4);
         this.add(help);
 
-        l1.setBounds(485, 5, 150, 180);
+        l1.setBounds(485, 5, 150, 180); // Priestor, kde sa vypisujú pokyny pre užívateľa
         l1.setText("Klikni na policko,"
                 + "\nkde chces zmenit cislo");
         l1.setEditable(false);
@@ -183,14 +182,14 @@ public class Window extends JFrame {
 
     }
 
-    class Obsluha2 implements ActionListener {
+    private class HernePoleListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!tah) {
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
-                        if (e.getSource() == hernePole[i][j] && sudoku.zadaneSudoku[i][j] == 0) {
+                        if (e.getSource() == hernePole[i][j] && sudoku.zadaneSudoku[i][j] == 0) { // Kliknutie na tlačítko z herného poľa puzzle sudoku 9*9, pričom to nie je tlačítko s vygenerovaným číslom na začiatku
                             riadok = i;
                             stlpec = j;
                             l1.setText("Klikni na cislo, "
@@ -210,25 +209,25 @@ public class Window extends JFrame {
         }
     }
 
-    class Obsluha4 implements ActionListener {
+    private class PomocneTlacitkaListener implements ActionListener { 
 
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                sudoku.ukladanie(sudoku.herneSudoku, sudoku.zadaneSudoku, sudoku.vyrieseneSudoku);
+                sudoku.ukladanie(sudoku.herneSudoku, sudoku.zadaneSudoku, sudoku.vyrieseneSudoku); // Uloženie rozohratej hry
                 if (tah) {
-                    if (e.getSource() == t) {
+                    if (e.getSource() == vymaz) { // Kliknuttie na tlačítko pre vymazanie použivateľom zadaného čísla
                         tah = false;
                         hernePole[riadok][stlpec].setBackground(Color.white);
                         hernePole[riadok][stlpec].setText("");
-                        sudoku.herneSudoku[riadok][stlpec] = 0;
+                        sudoku.herneSudoku[riadok][stlpec] = 0; // Nastavenie hodnoty 0 v poli pre sudoku na hranie
                         l1.setText("Klikni na policko,"
                                 + "\nkde chces zmenit cislo");
                     }
-                    if (e.getSource() == help) {
+                    if (e.getSource() == help) { // Kliknuttie na tlačítko pre pomoc 
                         tah = false;
                         String pom = String.format("" + sudoku.vyrieseneSudoku[riadok][stlpec]);
-                        hernePole[riadok][stlpec].setText(pom);
+                        hernePole[riadok][stlpec].setText(pom); 
                         hernePole[riadok][stlpec].setBackground(Color.white);
                         sudoku.herneSudoku[riadok][stlpec] = sudoku.vyrieseneSudoku[riadok][stlpec];
                         l1.setText("Klikni na policko,"
@@ -241,7 +240,7 @@ public class Window extends JFrame {
         }
     }
 
-    class Obsluha3 implements ActionListener {
+    private class ObsluhaCiselListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -249,7 +248,7 @@ public class Window extends JFrame {
                 sudoku.ukladanie(sudoku.herneSudoku, sudoku.zadaneSudoku, sudoku.vyrieseneSudoku);
                 if (tah) {
                     for (int i = 1; i < 10; i++) {
-                        if (e.getSource() == cisla[i]) {
+                        if (e.getSource() == cisla[i]) { // Zachytenie kliku na nejaké číslo v rozmedzí 1-9
                             cislo = Double.parseDouble(cisla[i].getText());
                             cislo1 = cislo.intValue();
                             String pom = String.format("" + cislo1);
@@ -258,12 +257,12 @@ public class Window extends JFrame {
                             tah = false;
                             hernePole[riadok][stlpec].setBackground(Color.white);
 
-                            if (sudoku.existujeVriadku(sudoku.herneSudoku, cislo1, riadok)
+                            if (sudoku.existujeVriadku(sudoku.herneSudoku, cislo1, riadok) // Kolntrola či sa užívateľ nesnaží dosadi´t číslo proti pravidlám hry sudoku
                                     || sudoku.existujeVstlpci(sudoku.herneSudoku, cislo1, stlpec)
                                     || sudoku.existujeVbunke(sudoku.herneSudoku, cislo1, riadok, stlpec)) {
                                 l1.setText("Porusenie pravidiel."
                                         + "\n\nOpakuj Zadanie!");
-                            } else {
+                            } else { // Pokiaľ nedochádza k porušeniu pravidiel vybrané číslo sa dosadzuje
                                 sudoku.herneSudoku[riadok][stlpec] = cislo1;
                                 String pom1 = String.format("" + cislo1);
                                 hernePole[riadok][stlpec].setText(pom1);

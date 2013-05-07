@@ -15,11 +15,11 @@ import java.util.Random;
  */
 public class Sudoku {
 
-    public int[][] herneSudoku = new int[9][9]; // Herne sudoku
-    public int[][] zadaneSudoku = new int[9][9]; // Zaciatocne sudoku 
-    public int[][] vyrieseneSudoku = new int[9][9]; // Vygenerovanie vyrieseneho sudoku
+    public int[][] herneSudoku = new int[9][9]; // Pole čísel, predstavujúce sudoku pre hru
+    public int[][] zadaneSudoku = new int[9][9]; // Sudoku v pôvodnom zadaní na začiatku hry
+    public int[][] vyrieseneSudoku = new int[9][9]; // Úplne vyriešené sudoku
     private Random rand = new Random();
-    int a;
+    int a; // Konštanta "a" pre nastavenie obtiažnosti
 
     public Sudoku(int a) // Konstruktor generuje nove sudoku a jeho riesenie
     {
@@ -56,7 +56,7 @@ public class Sudoku {
         return false;
     }
 
-    private void generujZadaneSudoku() // Vygeneruje Sudoku uz z vyrieseneho 
+    private void generujZadaneSudoku() // Vygeneruje sudoku pre začatie hry, už z vyplneného sudoku
     {
         for (int riadok = 0; riadok < 9; riadok++) {
             for (int stlpec = 0; stlpec < 9; stlpec++) {
@@ -70,7 +70,7 @@ public class Sudoku {
         }
         zamiesa(pole);
 
-        for (int i = 0; i < a; i++) {
+        for (int i = 0; i < a; i++) { // Podľa parametru "a" čo predstavuje obtiažnosť zmení čísla v sudoku na nulu
             int pom = pole[i];
             int stlpec = pom % 9;
             int riadok = pom / 9;
