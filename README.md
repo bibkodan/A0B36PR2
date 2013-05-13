@@ -12,7 +12,7 @@ Program načíta novú hru / hru uloženú. Pri vytváraní novej hry si užíva
 Užívateľ môže zadať ťah, u ktorého program overí jeho prístupnosť (vzhľadom na pravidlá hry). 
 Program môže navrhnúť ťah vedený k riešeni. Použitie grafického rozhrania.
 
-
+--------------------------------------------------------------------------------------------
 
 Pravidlá hry:
 
@@ -23,7 +23,7 @@ rozdelených na 9 podoblastí s 3x3 políčkami. V každej podoblasti sa každá
 vyskytnúť práve raz. V každom stĺpci a v každom riadku sa má každá číslica vyskytnúť práve
 raz.
 
-
+--------------------------------------------------------------------------------------------
 
 Ovládanie programu:
 
@@ -35,3 +35,13 @@ namiesto hráča. Tlačítko "( - )", ktoré má za úlohu z hracieho poľa vyma
 hornom rohu sa takisto nachádza textová oblasť, na ktorej sa zobrazujú pokyny pre hráča. Zvyšný priesto okna zaberá 
 sudoku puzzle. V puzzle si užívateľ volí miesto, kde chce zadať číslo. Na dané miesto po kliknutí vyberá z tlačítok, ktoré 
 má na pravej strane k dispozícii. Užívateľ nemôže zmeniť číslo, ktoré je vygenerované na začiatku hry ako prvotné zadanie.
+
+--------------------------------------------------------------------------------------------
+
+Zdrojový kód programu:
+
+
+Trieda Sudoku_BibkoDan (main):
+
+
+
