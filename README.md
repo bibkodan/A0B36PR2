@@ -6,13 +6,16 @@ Semestrálna práca pre predmet A0B36PR2
 
 SUDOKU
 
-Zadanie: \n
+Zadanie: 
+
 Program načíta novú hru / hru uloženú. Pri vytváraní novej hry si užívateľ zzvolí obtiažnosť 
 Užívateľ môže zadať ťah, u ktorého program overí jeho prístupnosť (vzhľadom na pravidlá hry). 
 Program môže navrhnúť ťah vedený k riešeni. Použitie grafického rozhrania.
 
 
+
 Pravidlá hry:
+
 Cieľom je doplniť chýbajúce číslice od 1 do 9 podľa nasledujúcich pravidiel. Na začiatku
 riešenia sú niektoré políčka vyplnené číslicami. Vyplnené číslice sú rozmiestnené tak, aby pre
 dané rozmiestnenie existovalo iba jediné riešenie. Hrací plán sa skladá z 9x9 políčok
@@ -21,7 +24,9 @@ vyskytnúť práve raz. V každom stĺpci a v každom riadku sa má každá čí
 raz.
 
 
+
 Ovládanie programu:
+
 Program sa ovláda za pomoci myšky, kde program reaguje na kliknutie. Pri spustený program, má užívateľ na výber dve hlavné 
 možnosti (nová hra / pokračovanie v rozohratej hre). Priz zvolení možnosti hry novej si užívateľ volí obtiažnosť.
 Po voľbe typu hry sa otvára nové onko, ktoŕe je zároveň oknom hracím. V pravej časti okna sa nachádza uživateľské rozhranie.
