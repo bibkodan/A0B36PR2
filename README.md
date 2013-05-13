@@ -6,7 +6,7 @@ Semestrálna práca pre predmet A0B36PR2
 
 SUDOKU
 
-Zadanie:
+Zadanie: \n
 Program načíta novú hru / hru uloženú. Pri vytváraní novej hry si užívateľ zzvolí obtiažnosť 
 Užívateľ môže zadať ťah, u ktorého program overí jeho prístupnosť (vzhľadom na pravidlá hry). 
 Program môže navrhnúť ťah vedený k riešeni. Použitie grafického rozhrania.
